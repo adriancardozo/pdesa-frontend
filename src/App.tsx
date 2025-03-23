@@ -5,6 +5,7 @@ import './App.css'
 import { Button, CssBaseline } from '@mui/material'
 
 function App() {
+  console.log(`Version: ${import.meta.env.VITE_SELF_VERSION ?? "-"}`);
   const [count, setCount] = useState(0)
 
   return (
