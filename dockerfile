@@ -1,5 +1,5 @@
 # Build stage
-FROM node:22.13.0 AS build
+FROM node:22.13.0-alpine AS build
 WORKDIR /app
 
 # Get image arguments and set build environment variables
