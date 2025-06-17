@@ -5,7 +5,6 @@ WORKDIR /app
 # Get image arguments and set build environment variables
 ARG VITE_SELF_VERSION="-"
 ENV VITE_SELF_VERSION=${VITE_SELF_VERSION}
-ENV VITE_ENV="production"
 
 # Add dependencies to PATH
 ENV PATH=/app/node_modules/.bin:$PATH
@@ -16,4 +15,4 @@ RUN npm ci --silent
 COPY . ./
 
 EXPOSE 80
-CMD ["npx", "vite", "--host", "--port", "80"]
+CMD ["npx", "vite", "--host", "--port", "80", "--mode", "production"]
