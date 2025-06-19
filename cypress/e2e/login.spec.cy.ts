@@ -1,6 +1,8 @@
 describe('Login', () => {
   it('Gets, types and asserts', () => {
-    cy.visit('http://localhost:5173');
+    cy.fixture('app').then((app) => {
+      cy.visit(app.url);
+    });
     cy.fixture('purchaser').then(({ username, password }) => {
       cy.login(username, password);
     });
