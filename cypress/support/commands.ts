@@ -35,3 +35,9 @@
 //     }
 //   }
 // }
+Cypress.Commands.add('login', (username: string, password: string) => {
+  cy.get('[data-testid=login-username]').type(username);
+  cy.get('[data-testid=login-password]').type(password);
+
+  cy.get('[data-testid=login-submit]').click();
+});
