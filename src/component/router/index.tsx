@@ -17,6 +17,9 @@ const Router = () => {
           <Route path="/home" element={<ProtectedRoute />}>
             <Route path="/home" element={<HomePage />} />
           </Route>
+          <Route path="/results" element={<ProtectedRoute />}>
+            <Route path="/results" element={<HomePage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
