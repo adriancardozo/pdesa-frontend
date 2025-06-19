@@ -35,6 +35,7 @@ const LoginPage: FC = () => {
           variant="standard"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          data-testid="login-username"
         />
         <TextField
           label="Contraseña"
@@ -42,8 +43,9 @@ const LoginPage: FC = () => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          data-testid="login-password"
         />
-        <Button type="submit" onClick={login}>
+        <Button type="submit" onClick={login} data-testid="login-submit">
           Ingresar
         </Button>
       </Stack>

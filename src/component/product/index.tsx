@@ -10,7 +10,7 @@ export type ProductProps = {
   setProducts: Dispatch<SetStateAction<ProductModel[]>>;
 };
 
-const Product: FC<ProductProps> = ({ product, setProducts }) => {
+const Product: FC<ProductProps> = ({ product, setProducts, ...rest }) => {
   const [styles] = useState(getStyles());
 
   const like = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, product: ProductModel) => {
@@ -28,7 +28,7 @@ const Product: FC<ProductProps> = ({ product, setProducts }) => {
   };
 
   return (
-    <Grid2 sx={styles.root} onClick={() => console.log(product)}>
+    <Grid2 sx={styles.root} onClick={() => console.log(product)} {...rest}>
       <Tooltip title={product.name}>
         <Grid2>
           <Card sx={styles.card}>

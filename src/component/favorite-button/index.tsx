@@ -15,11 +15,21 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({ product, onLike, onUnl
   const [styles] = useState(getStyles());
 
   return product.is_favorite ? (
-    <IconButton sx={styles.iconButton} color="primary" onClick={(e) => onUnlike(e, product)}>
+    <IconButton
+      sx={styles.iconButton}
+      color="primary"
+      onClick={(e) => onUnlike(e, product)}
+      data-testid="favorite"
+    >
       <FavoriteIcon />
     </IconButton>
   ) : (
-    <IconButton sx={styles.iconButton} color="primary" onClick={(e) => onLike(e, product)}>
+    <IconButton
+      sx={styles.iconButton}
+      color="primary"
+      onClick={(e) => onLike(e, product)}
+      data-testid="unfavorite"
+    >
       <FavoriteBorderIcon />
     </IconButton>
   );

@@ -36,14 +36,15 @@ const HomePage: FC = () => {
           sx={styles.search}
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
+          data-testid="product-search-input"
         />
-        <Button variant="contained" type="submit" onClick={search}>
+        <Button variant="contained" type="submit" onClick={search} data-testid="product-search-submit">
           Buscar
         </Button>
       </Stack>
       <Grid2 sx={styles.products}>
         {products.map((product) => (
-          <Product key={`product-${product.ml_id}`} {...{ product, setProducts }} />
+          <Product data-testid="product" key={`product-${product.ml_id}`} {...{ product, setProducts }} />
         ))}
       </Grid2>
     </Grid2>
