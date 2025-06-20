@@ -50,8 +50,8 @@ jobs:
           path: pdesa-backend
       - run: docker compose -f 'pdesa-frontend/cypress/docker-compose.cypress.yml' up -d
       - uses: cypress-io/github-action@v6
+        env:
+          VITE_BACKEND_URL: http://localhost:3000
         with:
-          env:
-            VITE_BACKEND_URL: http://localhost:3000
           start: npm run dev
           working-directory: pdesa-frontend
