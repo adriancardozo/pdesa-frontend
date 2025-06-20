@@ -25,25 +25,28 @@ jobs:
   run-cypress:
     runs-on: ubuntu-latest
     steps:
-      - name: Push branch
-        id: branch
-        if: ${{ github.event_name == 'push' }}
-        run: |
-          echo "branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
       - name: branch
         id: branch
-        if: ${{ github.event_name == 'pull_request' }}
         run: |
-          echo "branch_name=$GITHUB_HEAD_REF" >> $GITHUB_OUTPUT
+          echo "push_branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+          echo "pull_request_branch_name=$GITHUB_HEAD_REF" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v4
         name: Checkout frontend
         with:
           path: pdesa-frontend
       - uses: actions/checkout@v4
         name: Checkout backend
+        if: ${{ github.event_name == 'push' }}
         with:
           repository: adriancardozo/pdesa-backend
-          ref: ${{ steps.branch.outputs.branch_name }}
+          ref: ${{ steps.branch.outputs.push_branch_name }}
+          path: pdesa-backend
+      - uses: actions/checkout@v4
+        name: Checkout backend
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          repository: adriancardozo/pdesa-backend
+          ref: ${{ steps.branch.outputs.pull_request_branch_name }}
           path: pdesa-backend
       - run: docker compose -f 'pdesa-frontend/cypress/docker-compose.cypress.yml' up -d
       - uses: cypress-io/github-action@v6
