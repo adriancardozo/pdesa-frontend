@@ -2,7 +2,7 @@ name: Run cypress tests
 
 on:
   push:
-    branches: ['main', 'development', feature-ui-tests-ci]
+    branches: ['main', 'development']
   pull_request:
     branches: ['main', 'development']
   workflow_dispatch:
