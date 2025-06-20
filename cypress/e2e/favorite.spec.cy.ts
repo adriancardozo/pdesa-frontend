@@ -1,14 +1,24 @@
 describe('Favorite', () => {
   beforeEach(function () {
+    cy.log('1');
     cy.visit(Cypress.env('app_url'));
+    cy.log('2');
     cy.fixture('purchaser').then((purchaser) => {
+      cy.log('3');
       this.purchaser = purchaser;
+      cy.log('4');
       cy.login(this.purchaser.username, this.purchaser.password);
+      cy.log('5');
     });
+    cy.log('6');
     cy.fixture('search').then((search) => {
+      cy.log('7');
       this.search = search;
+      cy.log('8');
       cy.get('[data-testid=product-search-input]').type(this.search.text);
+      cy.log('9');
       cy.get('[data-testid=product-search-submit]').click();
+      cy.log('10');
     });
   });
 
