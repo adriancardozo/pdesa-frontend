@@ -10,7 +10,8 @@
     "format": "prettier --write .",
     "preview": "vite preview",
     "prepare": "husky",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:prod:open": "cypress open --env app_url=http://localhost:80"
   },
   "lint-staged": {
     "**/*.{ts,tsx,js,jsx}": [

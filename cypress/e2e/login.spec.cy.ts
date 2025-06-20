@@ -1,8 +1,6 @@
 describe('Login', () => {
-  it('Gets, types and asserts', () => {
-    cy.fixture('app').then((app) => {
-      cy.visit(app.url);
-    });
+  it('Login user', () => {
+    cy.visit(Cypress.env('app_url'));
     cy.fixture('purchaser').then(({ username, password }) => {
       cy.login(username, password);
     });

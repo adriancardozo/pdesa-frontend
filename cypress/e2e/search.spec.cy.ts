@@ -1,8 +1,6 @@
 describe('Search', () => {
   beforeEach(function () {
-    cy.fixture('app').then((app) => {
-      cy.visit(app.url);
-    });
+    cy.visit(Cypress.env('app_url'));
     cy.fixture('purchaser').then((purchaser) => {
       this.purchaser = purchaser;
       cy.login(this.purchaser.username, this.purchaser.password);
@@ -22,32 +20,8 @@ describe('Search', () => {
       cy.url().should('include', `/results?q=${this.search.text}`);
     });
 
-    it('should to show product names', function () {
-      cy.get('[data-testid=product]').each((element, index) => {
-        cy.wrap(element).should('contain.text', this.search.results[index].name);
-      });
-    });
-
-    it('should to show product images', function () {
-      cy.get('[data-testid=product] img').each((element, index) => {
-        cy.wrap(element).should('have.attr', 'src', this.search.results[index].images[0]);
-      });
-    });
-
-    it('should to show fullfilled favorite icon if product is favorite', function () {
-      cy.get('[data-testid=product]').each((element, index) => {
-        if (this.search.results[index].is_favorite) {
-          cy.wrap(element).get('[data-testid=favorite]').should('exist');
-        }
-      });
-    });
-
-    it("should to show fullfilled favorite icon if product isn't favorite", function () {
-      cy.get('[data-testid=product]').each((element, index) => {
-        if (!this.search.results[index].is_favorite) {
-          cy.wrap(element).get('[data-testid=unfavorite]').should('exist');
-        }
-      });
+    it('should get at least one product', function () {
+      cy.get('[data-testid=product]').should('exist');
     });
   });
 

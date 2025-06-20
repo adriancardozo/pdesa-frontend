@@ -1,8 +1,6 @@
 describe('Favorite', () => {
   beforeEach(function () {
-    cy.fixture('app').then((app) => {
-      cy.visit(app.url);
-    });
+    cy.visit(Cypress.env('app_url'));
     cy.fixture('purchaser').then((purchaser) => {
       this.purchaser = purchaser;
       cy.login(this.purchaser.username, this.purchaser.password);
