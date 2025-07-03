@@ -1,4 +1,4 @@
-import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Grid2, IconButton, Toolbar, Typography } from '@mui/material';
 import { FC, MouseEventHandler, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { getStyles } from './style';
@@ -26,12 +26,14 @@ const NavBar: FC = () => {
         <Typography variant="h6" component="div" sx={styles.title}>
           STC
         </Typography>
-        <Typography variant="body1" component="div">
-          {user?.firstName} {user?.lastName}
-        </Typography>
-        <IconButton sx={styles.iconButton} onClick={logout}>
-          <LogoutIcon />
-        </IconButton>
+        <Grid2 sx={styles.user}>
+          <Typography variant="body1" component="div">
+            {user?.firstName} {user?.lastName}
+          </Typography>
+          <IconButton sx={styles.iconButton} onClick={logout}>
+            <LogoutIcon />
+          </IconButton>
+        </Grid2>
       </Toolbar>
     </AppBar>
   );

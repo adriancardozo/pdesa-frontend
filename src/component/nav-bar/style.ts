@@ -1,9 +1,10 @@
-import { TypographyProps } from '@mui/material';
+import { Grid2Props, TypographyProps } from '@mui/material';
 import { IconButtonProps } from '@mui/material';
 
 export type NavBarStyles = {
   title: TypographyProps['sx'];
   iconButton: IconButtonProps['sx'];
+  user: Grid2Props['sx'];
 };
 
 export function getStyles(): NavBarStyles {
@@ -13,5 +14,6 @@ export function getStyles(): NavBarStyles {
       ':focus-visible': { outline: 'none' },
       ':focus': { outline: 'none' },
     },
+    user: { position: 'absolute', right: '1.5rem', display: 'flex', alignItems: 'center' },
   };
 }
