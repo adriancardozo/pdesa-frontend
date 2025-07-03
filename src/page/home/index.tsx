@@ -5,6 +5,7 @@ import Product from '../../component/product';
 import { ProductModel } from '../../model/product';
 import { getStyles } from './style';
 import { useNavigate } from 'react-router';
+import PageContainer from '../../component/page-container';
 
 const HomePage: FC = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const HomePage: FC = () => {
   };
 
   return (
-    <Grid2 sx={styles.root}>
+    <PageContainer>
       <Typography variant="h3" color="textSecondary">
         Buscar un producto
       </Typography>
@@ -47,7 +48,7 @@ const HomePage: FC = () => {
           <Product data-testid="product" key={`product-${product.ml_id}`} {...{ product, setProducts }} />
         ))}
       </Grid2>
-    </Grid2>
+    </PageContainer>
   );
 };
 
