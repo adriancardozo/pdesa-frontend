@@ -26,6 +26,24 @@ export class AuthService extends Service {
     });
   }
 
+  async registerAdministrator(
+    firstName: string,
+    lastName: string,
+    dni: string,
+    email: string,
+    username: string,
+    password: string,
+  ): Promise<AxiosResponse<AccessTokenResponse>> {
+    return await this.httpClient.post('auth/register/administrator', {
+      firstName,
+      lastName,
+      dni,
+      email,
+      username,
+      password,
+    });
+  }
+
   async profile(): Promise<AxiosResponse<UserResponse>> {
     return await this.httpClient.get('auth/profile');
   }
