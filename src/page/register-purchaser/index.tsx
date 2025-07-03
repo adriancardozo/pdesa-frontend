@@ -76,6 +76,12 @@ const RegisterPurchaserPage: FC = () => {
           Registrarse
         </Button>
       </Stack>
+      <Typography>
+        Si ya tienes una cuenta, haz{' '}
+        <Typography component="a" href="/">
+          click aquí.
+        </Typography>
+      </Typography>
     </Grid2>
   );
 };

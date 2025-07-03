@@ -7,7 +7,13 @@ export type RegisterPurchaserPageStyles = {
 
 export function getStyles(): RegisterPurchaserPageStyles {
   return {
-    root: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      flexGrow: 1,
+      justifyContent: 'center',
+    },
     form: { width: '25ch' },
   };
 }
