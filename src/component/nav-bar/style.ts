@@ -1,5 +1,4 @@
-import { Grid2Props, TypographyProps } from '@mui/material';
-import { IconButtonProps } from '@mui/material';
+import { Grid2Props, TypographyProps, IconButtonProps } from '@mui/material';
 
 export type NavBarStyles = {
   title: TypographyProps['sx'];
