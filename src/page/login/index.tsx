@@ -1,19 +1,15 @@
-import { Button, Grid2, Stack, TextField, Typography } from '@mui/material';
-import { FC, MouseEventHandler, useEffect, useState } from 'react';
+import { Button, Stack, TextField, Typography } from '@mui/material';
+import { FC, MouseEventHandler, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { AUTH_SERVICE } from '../../service/auth.service';
 import { getStyles } from './style';
+import PageContainer from '../../component/page-container';
 
 const LoginPage: FC = () => {
   const [styles] = useState(getStyles());
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem('token');
-    if (accessToken) navigate('/home');
-  }, [navigate]);
 
   const login: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
@@ -24,7 +20,7 @@ const LoginPage: FC = () => {
   };
 
   return (
-    <Grid2 sx={styles.root}>
+    <PageContainer appBar={false}>
       <Typography variant="h3" color="textSecondary">
         STC
       </Typography>
@@ -49,7 +45,13 @@ const LoginPage: FC = () => {
           Ingresar
         </Button>
       </Stack>
-    </Grid2>
+      <Typography>
+        Si aún no estás registrado, haz{' '}
+        <Typography component="a" href="/register">
+          click aquí.
+        </Typography>
+      </Typography>
+    </PageContainer>
   );
 };
 

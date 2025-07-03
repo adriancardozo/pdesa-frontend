@@ -1,10 +1,10 @@
 import { StackProps } from '@mui/material';
 
-export type LoginPageStyles = {
+export type AdminUserRegisterPageStyles = {
   form: StackProps['sx'];
 };
 
-export function getStyles(): LoginPageStyles {
+export function getStyles(): AdminUserRegisterPageStyles {
   return {
     form: { width: '25ch' },
   };

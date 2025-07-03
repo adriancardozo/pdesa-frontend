@@ -1,0 +1,57 @@
+name: Run cypress tests
+
+on:
+  push:
+    branches: ['main', 'development']
+  pull_request:
+    branches: ['main', 'development']
+  workflow_dispatch:
+env:
+  ML_CLIENT_ID: ${{ secrets.ML_CLIENT_ID }}
+  ML_CLIENT_SECRET: ${{ secrets.ML_CLIENT_SECRET }}
+  ML_ACCESS_TOKEN: ${{ secrets.ML_ACCESS_TOKEN }}
+  ML_REFRESH_TOKEN: ${{ secrets.ML_REFRESH_TOKEN }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  MSSQL_PASSWORD: ${{ secrets.MSSQL_PASSWORD }}
+  MSSQL_DB: ${{ vars.MSSQL_DB }}
+  MSSQL_HOST: ${{ vars.MSSQL_HOST }}
+  MSSQL_PORT: ${{ vars.MSSQL_PORT }}
+  MSSQL_USER: ${{ vars.MSSQL_USER }}
+  MSSQL_SYNCHRONIZE: ${{ vars.MSSQL_SYNCHRONIZE }}
+  MSSQL_LOGGING: ${{ vars.MSSQL_LOGGING }}
+  MSSQL_ENCRYPT: ${{ vars.MSSQL_ENCRYPT }}
+  MSSQL_TRUST_CERT: ${{ vars.MSSQL_TRUST_CERT }}
+jobs:
+  run-cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: branch
+        id: branch
+        run: |
+          echo "push_branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+          echo "pull_request_branch_name=$GITHUB_BASE_REF" >> $GITHUB_OUTPUT
+      - uses: actions/checkout@v4
+        name: Checkout frontend
+        with:
+          path: pdesa-frontend
+      - uses: actions/checkout@v4
+        name: Checkout backend
+        if: ${{ github.event_name == 'push' }}
+        with:
+          repository: adriancardozo/pdesa-backend
+          ref: ${{ steps.branch.outputs.push_branch_name }}
+          path: pdesa-backend
+      - uses: actions/checkout@v4
+        name: Checkout backend
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          repository: adriancardozo/pdesa-backend
+          ref: ${{ steps.branch.outputs.pull_request_branch_name }}
+          path: pdesa-backend
+      - run: docker compose -f 'pdesa-frontend/cypress/docker-compose.cypress.yml' up -d
+      - uses: cypress-io/github-action@v6
+        env:
+          VITE_BACKEND_URL: http://localhost:3000
+        with:
+          start: npm run dev
+          working-directory: pdesa-frontend
