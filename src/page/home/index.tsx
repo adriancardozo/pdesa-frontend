@@ -5,7 +5,7 @@ import Product from '../../component/product';
 import { ProductModel } from '../../model/product';
 import { getStyles } from './style';
 import { useNavigate } from 'react-router';
-import NavBar from '../../component/nav-bar';
+import PageContainer from '../../component/page-container';
 
 const HomePage: FC = () => {
   const navigate = useNavigate();
@@ -26,32 +26,29 @@ const HomePage: FC = () => {
   };
 
   return (
-    <>
-      <NavBar />
-      <Grid2 sx={styles.root}>
-        <Typography variant="h3" color="textSecondary">
-          Buscar un producto
-        </Typography>
-        <Stack component="form" sx={styles.form} spacing={2} noValidate autoComplete="off" direction="row">
-          <TextField
-            label="Buscar productos"
-            variant="filled"
-            sx={styles.search}
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            data-testid="product-search-input"
-          />
-          <Button variant="contained" type="submit" onClick={search} data-testid="product-search-submit">
-            Buscar
-          </Button>
-        </Stack>
-        <Grid2 sx={styles.products}>
-          {products.map((product) => (
-            <Product data-testid="product" key={`product-${product.ml_id}`} {...{ product, setProducts }} />
-          ))}
-        </Grid2>
+    <PageContainer>
+      <Typography variant="h3" color="textSecondary">
+        Buscar un producto
+      </Typography>
+      <Stack component="form" sx={styles.form} spacing={2} noValidate autoComplete="off" direction="row">
+        <TextField
+          label="Buscar productos"
+          variant="filled"
+          sx={styles.search}
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          data-testid="product-search-input"
+        />
+        <Button variant="contained" type="submit" onClick={search} data-testid="product-search-submit">
+          Buscar
+        </Button>
+      </Stack>
+      <Grid2 sx={styles.products}>
+        {products.map((product) => (
+          <Product data-testid="product" key={`product-${product.ml_id}`} {...{ product, setProducts }} />
+        ))}
       </Grid2>
-    </>
+    </PageContainer>
   );
 };
 

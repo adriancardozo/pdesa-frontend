@@ -1,8 +1,9 @@
-import { Button, Grid2, Stack, TextField, Typography } from '@mui/material';
+import { Button, Stack, TextField, Typography } from '@mui/material';
 import { FC, MouseEventHandler, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { AUTH_SERVICE } from '../../service/auth.service';
 import { getStyles } from './style';
+import PageContainer from '../../component/page-container';
 
 const RegisterPurchaserPage: FC = () => {
   const [styles] = useState(getStyles());
@@ -23,7 +24,7 @@ const RegisterPurchaserPage: FC = () => {
   };
 
   return (
-    <Grid2 sx={styles.root}>
+    <PageContainer appBar={false}>
       <Typography variant="h3" color="textSecondary">
         STC
       </Typography>
@@ -82,7 +83,7 @@ const RegisterPurchaserPage: FC = () => {
           click aquí.
         </Typography>
       </Typography>
-    </Grid2>
+    </PageContainer>
   );
 };
 
