@@ -1,5 +1,5 @@
 import { Button, Grid2, Stack, TextField, Typography } from '@mui/material';
-import { FC, MouseEventHandler, useEffect, useState } from 'react';
+import { FC, MouseEventHandler, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { AUTH_SERVICE } from '../../service/auth.service';
 import { getStyles } from './style';
@@ -9,11 +9,6 @@ const LoginPage: FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem('token');
-    if (accessToken) navigate('/home');
-  }, [navigate]);
 
   const login: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
@@ -49,6 +44,12 @@ const LoginPage: FC = () => {
           Ingresar
         </Button>
       </Stack>
+      <Typography>
+        Si aún no estás registrado, haz{' '}
+        <Typography component="a" href="/register">
+          click aquí.
+        </Typography>
+      </Typography>
     </Grid2>
   );
 };

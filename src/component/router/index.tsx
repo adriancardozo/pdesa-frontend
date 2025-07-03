@@ -4,6 +4,7 @@ import { CssBaseline } from '@mui/material';
 import HomePage from '../../page/home';
 import ProtectedRoute from '../protected-route';
 import PublicRoute from '../public-route';
+import RegisterPurchaserPage from '../../page/register-purchaser';
 
 const Router = () => {
   return (
@@ -13,6 +14,9 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<PublicRoute />}>
             <Route path="/" element={<LoginPage />} />
+          </Route>
+          <Route path="/register" element={<PublicRoute />}>
+            <Route path="/register" element={<RegisterPurchaserPage />} />
           </Route>
           <Route path="/home" element={<ProtectedRoute />}>
             <Route path="/home" element={<HomePage />} />
