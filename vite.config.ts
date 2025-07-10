@@ -5,6 +5,10 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
-    server: { ...(mode === 'production' ? { watch: null } : {}) },
+    server: {
+      ...(mode === 'production'
+        ? { watch: null, allowedHosts: ['pdesa-frontend-adriancardozo.azurewebsites.net'] }
+        : {}),
+    },
   };
 });
