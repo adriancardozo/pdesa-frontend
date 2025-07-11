@@ -9,6 +9,8 @@ import { Role } from '../../enum/role.enum';
 import AdminHomePage from '../../page/admin-home';
 import AdminUserPage from '../../page/admin-user';
 import AdminUserRegisterPage from '../../page/admin-user-register';
+import ProductPage from '../../page/product';
+import PurchasesPage from '../../page/purchases';
 
 const Router = () => {
   return (
@@ -27,6 +29,12 @@ const Router = () => {
           </Route>
           <Route path="/results" element={<ProtectedRoute roles={[Role.purchaser]} />}>
             <Route path="/results" element={<HomePage />} />
+          </Route>
+          <Route path="/product" element={<ProtectedRoute roles={[Role.purchaser]} />}>
+            <Route path="/product/:ml_id" element={<ProductPage />} />
+          </Route>
+          <Route path="/purchase" element={<ProtectedRoute roles={[Role.purchaser]} />}>
+            <Route path="/purchase" element={<PurchasesPage />} />
           </Route>
           <Route path="/admin/home" element={<ProtectedRoute roles={[Role.administrator]} />}>
             <Route path="/admin/home" element={<AdminHomePage />} />
