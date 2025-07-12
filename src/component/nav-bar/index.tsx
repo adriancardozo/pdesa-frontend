@@ -6,6 +6,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { AUTH_SERVICE } from '../../service/auth.service';
 import { UserResponse } from '../../type/user-response.type';
 import { Role } from '../../enum/role.enum';
+import BackButton from '../back-button';
 
 const NavBar: FC = () => {
   const [user, setUser] = useState<UserResponse>();
@@ -24,6 +25,9 @@ const NavBar: FC = () => {
   return (
     <AppBar component="nav" position="relative">
       <Toolbar>
+        <Grid2 sx={styles.backGrid}>
+          <BackButton />
+        </Grid2>
         <Typography variant="h6" component="div" sx={styles.title}>
           STC
         </Typography>
