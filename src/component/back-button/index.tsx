@@ -4,25 +4,30 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useLocation, useNavigate } from 'react-router';
 import { getStyles } from './style';
 
-const BackButton: FC = () => {
+export type BackButtonProps = {
+  defaultLocation?: string;
+};
+
+const BackButton: FC<BackButtonProps> = ({ defaultLocation: defaultLocationProp }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const defaultLocation = defaultLocationProp ?? '/home';
   const [styles] = useState(getStyles());
 
   const back = () => {
     if (location.key !== 'default') {
       navigate(-1);
-    } else {
-      navigate('/home');
+    } else if (defaultLocation) {
+      navigate(defaultLocation);
     }
   };
 
+  const visibility = () => (location.pathname === defaultLocation ? 'hidden' : 'visible');
+
   return (
-    location.pathname !== '/home' && (
-      <IconButton sx={styles.back} onClick={back}>
-        <ArrowBackIosNewIcon />
-      </IconButton>
-    )
+    <IconButton sx={{ ...styles.back, visibility: visibility() }} onClick={back}>
+      <ArrowBackIosNewIcon />
+    </IconButton>
   );
 };
 

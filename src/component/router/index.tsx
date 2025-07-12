@@ -11,6 +11,7 @@ import AdminUserPage from '../../page/admin-user';
 import AdminUserRegisterPage from '../../page/admin-user-register';
 import ProductPage from '../../page/product';
 import PurchasesPage from '../../page/purchases';
+import FavoritesPage from '../../page/favorites';
 
 const Router = () => {
   return (
@@ -32,6 +33,9 @@ const Router = () => {
           </Route>
           <Route path="/product" element={<ProtectedRoute roles={[Role.purchaser]} />}>
             <Route path="/product/:ml_id" element={<ProductPage />} />
+          </Route>
+          <Route path="/favorite" element={<ProtectedRoute roles={[Role.purchaser]} />}>
+            <Route path="/favorite" element={<FavoritesPage />} />
           </Route>
           <Route path="/purchase" element={<ProtectedRoute roles={[Role.purchaser]} />}>
             <Route path="/purchase" element={<PurchasesPage />} />

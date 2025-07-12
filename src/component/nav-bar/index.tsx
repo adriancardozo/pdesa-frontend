@@ -1,12 +1,11 @@
-import { AppBar, Button, Grid2, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Grid2, IconButton, Toolbar, Typography } from '@mui/material';
 import { FC, MouseEventHandler, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { getStyles } from './style';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { AUTH_SERVICE } from '../../service/auth.service';
 import { UserResponse } from '../../type/user-response.type';
-import { Role } from '../../enum/role.enum';
-import BackButton from '../back-button';
+import RoleNavButtonGroup from '../role-nav-button-group';
 
 const NavBar: FC = () => {
   const [user, setUser] = useState<UserResponse>();
@@ -25,20 +24,11 @@ const NavBar: FC = () => {
   return (
     <AppBar component="nav" position="relative">
       <Toolbar>
-        <Grid2 sx={styles.backGrid}>
-          <BackButton />
-        </Grid2>
+        <Grid2 sx={styles.backGrid}>{user && <RoleNavButtonGroup role={user.role} />}</Grid2>
         <Typography variant="h6" component="div" sx={styles.title}>
           STC
         </Typography>
         <Grid2 sx={styles.user}>
-          {user?.role === Role.administrator && (
-            <Grid2 sx={styles.users}>
-              <Button variant="contained" color="secondary" onClick={() => navigate('/admin/user')}>
-                Users
-              </Button>
-            </Grid2>
-          )}
           <Typography variant="body1" component="div">
             {user?.firstName} {user?.lastName}
           </Typography>
