@@ -1,9 +1,9 @@
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { Card, Grid2, Tooltip, Typography } from '@mui/material';
-import { FAVORITE_SERVICE } from '../../service/favorite.service';
 import { getStyles } from './styles';
 import FavoriteButton from '../favorite-button';
 import { ProductModel } from '../../model/product';
+import { useNavigate } from 'react-router';
 
 export type ProductProps = {
   product: ProductModel;
@@ -11,24 +11,15 @@ export type ProductProps = {
 };
 
 const Product: FC<ProductProps> = ({ product, setProducts, ...rest }) => {
+  const navigate = useNavigate();
   const [styles] = useState(getStyles());
 
-  const like = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, product: ProductModel) => {
-    e.stopPropagation();
-    FAVORITE_SERVICE.addFavorite(product.ml_id)
-      .then(({ data }) => setProducts((previous) => previous.map((search) => data.replace(search))))
-      .catch((error) => console.error(error));
-  };
-
-  const unlike = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, product: ProductModel) => {
-    e.stopPropagation();
-    FAVORITE_SERVICE.deleteFavorite(product.ml_id)
-      .then(({ data }) => setProducts((previous) => previous.map((search) => data.replace(search))))
-      .catch((error) => console.error(error));
+  const updateFavorite = (product: ProductModel) => {
+    setProducts((previous) => previous.map((search) => product.replace(search)));
   };
 
   return (
-    <Grid2 sx={styles.root} onClick={() => console.log(product)} {...rest}>
+    <Grid2 sx={styles.root} onClick={() => navigate(`/product/${product.ml_id}`)} {...rest}>
       <Tooltip title={product.name}>
         <Grid2>
           <Card sx={styles.card}>
@@ -40,7 +31,7 @@ const Product: FC<ProductProps> = ({ product, setProducts, ...rest }) => {
             </Grid2>
           </Card>
           <Grid2 sx={styles.iconButtonGrid}>
-            <FavoriteButton product={product} onLike={like} onUnlike={unlike} />
+            <FavoriteButton product={product} onUpdate={updateFavorite} />
           </Grid2>
         </Grid2>
       </Tooltip>
