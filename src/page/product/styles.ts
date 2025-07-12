@@ -1,4 +1,4 @@
-import { alpha, CardProps, Grid2Props, StackProps, TextFieldProps } from '@mui/material';
+import { alpha, CardProps, Grid2Props } from '@mui/material';
 
 export type ProductPageStyles = {
   root: Grid2Props['sx'];
@@ -8,8 +8,6 @@ export type ProductPageStyles = {
   image: Grid2Props['sx'];
   iconButtonGrid: Grid2Props['sx'];
   imageGrid: Grid2Props['sx'];
-  form: StackProps['sx'];
-  amount: TextFieldProps['sx'];
 };
 
 export function getStyles(): ProductPageStyles {
