@@ -17,7 +17,7 @@ export function getStyles(): ProductPageStyles {
     root: { alignItems: 'center', display: 'flex', flexDirection: 'column' },
     card: {
       margin: '1rem',
-      width: '80%',
+      width: '65%',
       backgroundColor: alpha('#000000', 0.02),
       position: 'relative',
     },
@@ -34,7 +34,5 @@ export function getStyles(): ProductPageStyles {
       bottom: '0rem',
       right: '0rem',
     },
-    form: { width: '25ch' },
-    amount: { '& .MuiInput-input': { textAlign: 'center' } },
   };
 }
