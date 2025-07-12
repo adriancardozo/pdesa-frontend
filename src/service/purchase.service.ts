@@ -7,7 +7,7 @@ export class PurchaseService extends Service {
     return await this.httpClient
       .get(`purchase`)
       .then((response: AxiosResponse<Array<PurchaseResponse>>) => {
-        response.data = response.data.sort((purchase1, purchase2) =>
+        response.data.sort((purchase1, purchase2) =>
           purchase1.created_at > purchase2.created_at ? -1 : 1,
         );
         return response;

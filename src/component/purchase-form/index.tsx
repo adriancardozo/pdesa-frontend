@@ -17,7 +17,7 @@ const PurchaseForm: FC<PurchaseFormProps> = ({ ml_id }) => {
 
   const purchase: MouseEventHandler<HTMLButtonElement> = () => {
     setPurchasing(true);
-    PURCHASE_SERVICE.purchase(ml_id!, amount)
+    PURCHASE_SERVICE.purchase(ml_id, amount)
       .then(() => {
         setPurchased(true);
         setTimeout(() => {
