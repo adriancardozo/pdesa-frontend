@@ -4,9 +4,9 @@ import { Card, Grid2, Typography } from '@mui/material';
 import { getStyles } from './styles';
 import { useParams } from 'react-router';
 import { PRODUCT_SERVICE } from '../../service/product.service';
-import FavoriteButton from '../../component/favorite-button';
 import { ProductModel } from '../../model/product';
 import PurchaseForm from '../../component/purchase-form';
+import ProductImage from '../../component/product-image';
 
 const ProductPage: FC = () => {
   const [product, setProduct] = useState<ProductModel>();
@@ -22,14 +22,9 @@ const ProductPage: FC = () => {
       <Grid2 sx={styles.root}>
         <Card sx={styles.card}>
           <Card sx={styles.imageCard}>
-            <Grid2 sx={styles.imageGrid}>
-              <Grid2 component="img" src={product?.images[0]} sx={styles.image} />
-              <Grid2 sx={styles.iconButtonGrid}>
-                {product && (
-                  <FavoriteButton product={product} onUpdate={(product) => setProduct(product)} />
-                )}
-              </Grid2>
-            </Grid2>
+            {product && (
+              <ProductImage product={product} onUpdate={(product) => setProduct(product)} width="100%" />
+            )}
           </Card>
           <Grid2 sx={styles.cardBody}>
             <Typography variant="h4">{product?.name}</Typography>

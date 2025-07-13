@@ -1,9 +1,9 @@
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { Card, Grid2, Tooltip, Typography } from '@mui/material';
 import { getStyles } from './styles';
-import FavoriteButton from '../favorite-button';
 import { ProductModel } from '../../model/product';
 import { useNavigate } from 'react-router';
+import ProductImage from '../product-image';
 
 export type ProductProps = {
   product: ProductModel;
@@ -27,12 +27,9 @@ const Product: FC<ProductProps> = ({ product, setProducts, ...rest }) => {
               {product.name}
             </Typography>
             <Grid2 sx={styles.imageGrid}>
-              <Grid2 component="img" src={product.images[0]} sx={styles.image} />
+              <ProductImage product={product} onUpdate={updateFavorite} width="100%" />
             </Grid2>
           </Card>
-          <Grid2 sx={styles.iconButtonGrid}>
-            <FavoriteButton product={product} onUpdate={updateFavorite} />
-          </Grid2>
         </Grid2>
       </Tooltip>
     </Grid2>

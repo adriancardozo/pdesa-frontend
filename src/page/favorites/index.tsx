@@ -1,10 +1,20 @@
 import { Grid2, Typography } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import PageContainer from '../../component/page-container';
 import { getStyles } from './style';
+import { FAVORITE_SERVICE } from '../../service/favorite.service';
+import { ProductModel } from '../../model/product';
+import Favorite from '../../component/favorite';
 
 const FavoritesPage: FC = () => {
+  const [favorites, setFavorites] = useState<Array<ProductModel>>([]);
   const [styles] = useState(getStyles());
+
+  useEffect(() => {
+    FAVORITE_SERVICE.favorites()
+      .then(({ data }) => setFavorites(data))
+      .catch((e) => console.error(e));
+  }, []);
 
   return (
     <PageContainer>
@@ -14,6 +24,15 @@ const FavoritesPage: FC = () => {
             Favoritos
           </Typography>
         </Grid2>
+        {favorites.map((favorite) => (
+          <Favorite
+            key={`favorite-${favorite.ml_id}`}
+            favorite={favorite}
+            onUpdateFavorite={(product) =>
+              setFavorites((previous) => previous.filter((favorite) => favorite.ml_id !== product.ml_id))
+            }
+          />
+        ))}
       </Grid2>
     </PageContainer>
   );

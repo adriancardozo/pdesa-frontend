@@ -25,7 +25,17 @@ const PurchasesPage: FC = () => {
           </Typography>
         </Grid2>
         {purchases.map((purchase) => (
-          <Purchase key={`purchase-${purchase.id}`} purchase={purchase} />
+          <Purchase
+            key={`purchase-${purchase.id}`}
+            purchase={purchase}
+            onUpdateProduct={(product) =>
+              setPurchases((previous) =>
+                previous.map((purchase) =>
+                  purchase.product.ml_id === product.ml_id ? { ...purchase, product } : purchase,
+                ),
+              )
+            }
+          />
         ))}
       </Grid2>
     </PageContainer>

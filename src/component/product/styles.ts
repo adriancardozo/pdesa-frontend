@@ -25,7 +25,7 @@ export function getStyles(): ProductStyles {
     imageGrid: {
       display: 'flex',
       flexGrow: 1,
-      flexDirection: 'column',
+      flexDirection: 'row-reverse',
       justifyContent: 'center',
       overflow: 'hidden',
     },
