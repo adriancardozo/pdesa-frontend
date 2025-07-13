@@ -8,7 +8,7 @@ import { ProductModel } from '../../model/product';
 
 export type ProductImageProps<T extends ProductResponse> = {
   product: T;
-  width?: Property.Width<string | number> | undefined;
+  width?: Property.Width<string | number>;
   onUpdate: (product: ProductModel) => void;
 };
 

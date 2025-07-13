@@ -5,6 +5,7 @@ import { PURCHASE_SERVICE } from '../../service/purchase.service';
 import { PurchaseResponse } from '../../type/purchase-response';
 import { getStyles } from './style';
 import Purchase from '../../component/purchase';
+import { ProductModel } from '../../model/product';
 
 const PurchasesPage: FC = () => {
   const [purchases, setPurchases] = useState<Array<PurchaseResponse>>([]);
@@ -16,6 +17,14 @@ const PurchasesPage: FC = () => {
       .catch((e) => console.error(e));
   }, []);
 
+  const updateProduct = (product: ProductModel) => {
+    setPurchases((previous) =>
+      previous.map((purchase) =>
+        purchase.product.ml_id === product.ml_id ? { ...purchase, product } : purchase,
+      ),
+    );
+  };
+
   return (
     <PageContainer>
       <Grid2 sx={styles.root}>
@@ -25,17 +34,7 @@ const PurchasesPage: FC = () => {
           </Typography>
         </Grid2>
         {purchases.map((purchase) => (
-          <Purchase
-            key={`purchase-${purchase.id}`}
-            purchase={purchase}
-            onUpdateProduct={(product) =>
-              setPurchases((previous) =>
-                previous.map((purchase) =>
-                  purchase.product.ml_id === product.ml_id ? { ...purchase, product } : purchase,
-                ),
-              )
-            }
-          />
+          <Purchase key={`purchase-${purchase.id}`} purchase={purchase} onUpdateProduct={updateProduct} />
         ))}
       </Grid2>
     </PageContainer>

@@ -8,7 +8,7 @@ export type ProductImageStyles = {
   favoriteGrid: Grid2Props['sx'];
 };
 
-export function getStyles(width?: Property.Width<string | number> | undefined): ProductImageStyles {
+export function getStyles(width?: Property.Width<string | number>): ProductImageStyles {
   return {
     root: { position: 'relative', display: 'flex', width },
     image: { width: 'inherit' },

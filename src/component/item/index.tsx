@@ -4,7 +4,7 @@ import { getStyles } from './styles';
 
 export type ItemProps = {
   title: string;
-  onClick?: MouseEventHandler<HTMLDivElement> | undefined;
+  onClick?: MouseEventHandler<HTMLDivElement>;
   images?: Array<string>;
   mainContent?: ReactNode;
   children: Array<ReactNode> | ReactNode;
@@ -16,9 +16,7 @@ const Item: FC<ItemProps> = ({ title, onClick, images, children, mainContent, ..
 
   const content = () => {
     const imageUrls = images ?? [];
-    return mainContent
-      ? mainContent
-      : imageUrls[0] && <Grid2 component="img" src={imageUrls[0]} sx={styles.image} />;
+    return mainContent ?? (imageUrls[0] && <Grid2 component="img" src={imageUrls[0]} sx={styles.image} />);
   };
 
   return (

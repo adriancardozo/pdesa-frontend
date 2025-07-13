@@ -16,6 +16,10 @@ const FavoritesPage: FC = () => {
       .catch((e) => console.error(e));
   }, []);
 
+  const updateFavorite = (product: ProductModel) => {
+    return setFavorites((previous) => previous.filter((favorite) => favorite.ml_id !== product.ml_id));
+  };
+
   return (
     <PageContainer>
       <Grid2 sx={styles.root}>
@@ -28,9 +32,7 @@ const FavoritesPage: FC = () => {
           <Favorite
             key={`favorite-${favorite.ml_id}`}
             favorite={favorite}
-            onUpdateFavorite={(product) =>
-              setFavorites((previous) => previous.filter((favorite) => favorite.ml_id !== product.ml_id))
-            }
+            onUpdateFavorite={updateFavorite}
           />
         ))}
       </Grid2>
