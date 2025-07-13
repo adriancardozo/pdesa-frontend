@@ -4,6 +4,13 @@ import { Service } from './service';
 import { ProductModel } from '../model/product';
 
 export class FavoriteService extends Service {
+  async favorites(): Promise<AxiosResponse<Array<ProductModel>>> {
+    return await this.httpClient.get('favorite').then((response: AxiosResponse<Array<ProductResponse>>) => {
+      response.data = response.data.map((favorite) => new ProductModel(favorite));
+      return response as AxiosResponse<Array<ProductModel>>;
+    });
+  }
+
   async addFavorite(id_ml: string): Promise<AxiosResponse<ProductModel>> {
     return await this.httpClient
       .post(`favorite/${id_ml}`)
