@@ -21,7 +21,7 @@ const AdminUserPage: FC = () => {
       <Grid2 sx={styles.root}>
         <Grid2 sx={styles.header}>
           <Typography variant="h4" sx={styles.title}>
-            Users
+            Usuarios
           </Typography>
           <Button onClick={() => navigate('/admin/user/register')}>Create user</Button>
         </Grid2>

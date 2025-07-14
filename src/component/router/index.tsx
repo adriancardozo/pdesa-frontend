@@ -12,6 +12,7 @@ import AdminUserRegisterPage from '../../page/admin-user-register';
 import ProductPage from '../../page/product';
 import PurchasesPage from '../../page/purchases';
 import FavoritesPage from '../../page/favorites';
+import AdminProductPage from '../../page/admin-product';
 
 const Router = () => {
   return (
@@ -48,6 +49,9 @@ const Router = () => {
           </Route>
           <Route path="/admin/user/register" element={<ProtectedRoute roles={[Role.administrator]} />}>
             <Route path="/admin/user/register" element={<AdminUserRegisterPage />} />
+          </Route>
+          <Route path="/admin/product" element={<ProtectedRoute roles={[Role.administrator]} />}>
+            <Route path="/admin/product/:ml_id" element={<AdminProductPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
