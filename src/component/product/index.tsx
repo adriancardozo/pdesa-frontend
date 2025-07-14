@@ -1,34 +1,30 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 import { Card, Grid2, Tooltip, Typography } from '@mui/material';
-import { FAVORITE_SERVICE } from '../../service/favorite.service';
 import { getStyles } from './styles';
-import FavoriteButton from '../favorite-button';
 import { ProductModel } from '../../model/product';
+import { useNavigate } from 'react-router';
+import ProductImage from '../product-image';
+import { ProductResponse } from '../../type/product-response.type';
 
-export type ProductProps = {
-  product: ProductModel;
+export type ProductProps<T extends ProductResponse> = {
+  product: T;
   setProducts: Dispatch<SetStateAction<ProductModel[]>>;
 };
 
-const Product: FC<ProductProps> = ({ product, setProducts, ...rest }) => {
+const Product = <T extends ProductResponse>({
+  product,
+  setProducts,
+  ...rest
+}: ProductProps<T>): ReactNode => {
+  const navigate = useNavigate();
   const [styles] = useState(getStyles());
 
-  const like = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, product: ProductModel) => {
-    e.stopPropagation();
-    FAVORITE_SERVICE.addFavorite(product.ml_id)
-      .then(({ data }) => setProducts((previous) => previous.map((search) => data.replace(search))))
-      .catch((error) => console.error(error));
-  };
-
-  const unlike = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, product: ProductModel) => {
-    e.stopPropagation();
-    FAVORITE_SERVICE.deleteFavorite(product.ml_id)
-      .then(({ data }) => setProducts((previous) => previous.map((search) => data.replace(search))))
-      .catch((error) => console.error(error));
+  const updateFavorite = (product: ProductModel) => {
+    setProducts((previous) => previous.map((search) => product.replace(search)));
   };
 
   return (
-    <Grid2 sx={styles.root} onClick={() => console.log(product)} {...rest}>
+    <Grid2 sx={styles.root} onClick={() => navigate(`/product/${product.ml_id}`)} {...rest}>
       <Tooltip title={product.name}>
         <Grid2>
           <Card sx={styles.card}>
@@ -36,12 +32,9 @@ const Product: FC<ProductProps> = ({ product, setProducts, ...rest }) => {
               {product.name}
             </Typography>
             <Grid2 sx={styles.imageGrid}>
-              <Grid2 component="img" src={product.images[0]} sx={styles.image} />
+              <ProductImage product={product} onUpdate={updateFavorite} width="100%" />
             </Grid2>
           </Card>
-          <Grid2 sx={styles.iconButtonGrid}>
-            <FavoriteButton product={product} onLike={like} onUnlike={unlike} />
-          </Grid2>
         </Grid2>
       </Tooltip>
     </Grid2>
