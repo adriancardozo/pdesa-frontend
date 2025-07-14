@@ -30,11 +30,11 @@ const Item: FC<ItemProps> = ({ title, onClick, images, children, mainContent, ..
                 {title}
               </Typography>
               <Typography variant="caption" sx={styles.title} noWrap>
-                {childs.map((child) => (
-                  <>
+                {childs.map((child, index) => (
+                  <Grid2 key={`child-${index}`}>
                     {child}
                     <br />
-                  </>
+                  </Grid2>
                 ))}
               </Typography>
             </Grid2>

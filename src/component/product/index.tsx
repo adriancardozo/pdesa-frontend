@@ -1,16 +1,21 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 import { Card, Grid2, Tooltip, Typography } from '@mui/material';
 import { getStyles } from './styles';
 import { ProductModel } from '../../model/product';
 import { useNavigate } from 'react-router';
 import ProductImage from '../product-image';
+import { ProductResponse } from '../../type/product-response.type';
 
-export type ProductProps = {
-  product: ProductModel;
+export type ProductProps<T extends ProductResponse> = {
+  product: T;
   setProducts: Dispatch<SetStateAction<ProductModel[]>>;
 };
 
-const Product: FC<ProductProps> = ({ product, setProducts, ...rest }) => {
+const Product = <T extends ProductResponse>({
+  product,
+  setProducts,
+  ...rest
+}: ProductProps<T>): ReactNode => {
   const navigate = useNavigate();
   const [styles] = useState(getStyles());
 
