@@ -30,10 +30,10 @@ const AdminHomePage: FC = () => {
         </Grid2>
         <Grid2 sx={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
           <Grid2 sx={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center' }}>
-            <MetricCard title="Más compradores" items={purchasers} type="user" />
-            <MetricCard title="Mas guardados" items={favorited} type="product" />
+            <MetricCard title="Más compradores" items={purchasers} type="user" cardKey="purchaser" />
+            <MetricCard title="Mas guardados" items={favorited} type="product" cardKey="favorited" />
           </Grid2>
-          <MetricCard title="Más comprados" items={purchased} type="product" />
+          <MetricCard title="Más comprados" items={purchased} type="product" cardKey="purchased" />
         </Grid2>
       </Grid2>
     </PageContainer>

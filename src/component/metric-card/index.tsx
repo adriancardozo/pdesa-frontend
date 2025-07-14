@@ -10,17 +10,19 @@ export type UserMetricCardProps = {
   title: string;
   type: 'user';
   items: Array<MetricItemType<UserResponse>>;
+  cardKey: string;
 };
 
 export type ProductMetricCardProps = {
   title: string;
   type: 'product';
   items: Array<MetricItemType<ProductResponse>>;
+  cardKey: string;
 };
 
 export type MetricsCardProps = UserMetricCardProps | ProductMetricCardProps;
 
-const MetricCard: FC<MetricsCardProps> = ({ title, type, items }) => {
+const MetricCard: FC<MetricsCardProps> = ({ title, type, items, cardKey }) => {
   const [styles] = useState(getStyles());
 
   return (
@@ -35,7 +37,12 @@ const MetricCard: FC<MetricsCardProps> = ({ title, type, items }) => {
           </Grid2>
           <Grid2 sx={styles.topFive}>
             {[1, 2, 3, 4, 5].map((value, index) => (
-              <MetricItem position={value} item={items[index] as any} type={type} />
+              <MetricItem
+                key={`item-${cardKey}-${index}-${type === 'user' ? (items[index]?.content?.id ?? '') : (items[index]?.content?.ml_id ?? '')}`}
+                position={value}
+                item={items[index] as any}
+                type={type}
+              />
             ))}
           </Grid2>
         </Grid2>
