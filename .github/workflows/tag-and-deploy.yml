@@ -76,7 +76,7 @@ jobs:
           context: .
           push: true
           build-args: |
-            "SELF_VERSION=${{ steps.version.outputs.TAG_NAME }}"
+            "VITE_SELF_VERSION=${{ steps.version.outputs.TAG_NAME }}"
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
