@@ -7,7 +7,7 @@ import { Button, Grid2, Typography } from '@mui/material';
 import { getStyles } from './style';
 import { useNavigate } from 'react-router';
 
-const AdminUserPage: FC = () => {
+const AdminUsersPage: FC = () => {
   const navigate = useNavigate();
   const [styles] = useState(getStyles());
   const [users, setUsers] = useState<Array<UserResponse>>([]);
@@ -33,4 +33,4 @@ const AdminUserPage: FC = () => {
   );
 };
 
-export default AdminUserPage;
+export default AdminUsersPage;

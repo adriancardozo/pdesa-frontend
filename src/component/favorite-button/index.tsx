@@ -10,11 +10,13 @@ import { ProductModel } from '../../model/product';
 export type FavoriteButtonProps<T extends ProductResponse> = {
   product: T;
   onUpdate: (product: ProductModel) => void;
+  disabled?: boolean;
 };
 
 export const FavoriteButton = <T extends ProductResponse>({
   product,
   onUpdate,
+  disabled,
 }: FavoriteButtonProps<T>): ReactNode => {
   const [styles] = useState(getStyles());
 
@@ -37,6 +39,7 @@ export const FavoriteButton = <T extends ProductResponse>({
       sx={styles.iconButton}
       color="primary"
       onClick={(e) => unlike(e, product)}
+      disabled={disabled}
       data-testid="favorite"
     >
       <FavoriteIcon />
@@ -46,6 +49,7 @@ export const FavoriteButton = <T extends ProductResponse>({
       sx={styles.iconButton}
       color="primary"
       onClick={(e) => like(e, product)}
+      disabled={disabled}
       data-testid="unfavorite"
     >
       <FavoriteBorderIcon />
