@@ -1,12 +1,12 @@
 import { Grid2Props, TypographyProps } from '@mui/material';
 
-export type AdminUserPageStyles = {
+export type AdminUsersPageStyles = {
   root: Grid2Props['sx'];
   header: Grid2Props['sx'];
   title: TypographyProps['sx'];
 };
 
-export function getStyles(): AdminUserPageStyles {
+export function getStyles(): AdminUsersPageStyles {
   return {
     root: {
       display: 'flex',

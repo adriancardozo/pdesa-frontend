@@ -1,5 +1,4 @@
-import { FC } from 'react';
-import { useNavigate } from 'react-router';
+import { FC, MouseEventHandler } from 'react';
 import Item from '../item';
 import ItemChild from '../item-child';
 import ProductImage from '../product-image';
@@ -9,16 +8,18 @@ import { ProductModel } from '../../model/product';
 export type FavoriteProps = {
   favorite: ProductResponse;
   onUpdateFavorite: (product: ProductModel) => void;
+  onClick?: MouseEventHandler<HTMLDivElement>;
+  disabled?: boolean;
 };
 
-const Favorite: FC<FavoriteProps> = ({ favorite, onUpdateFavorite: onUpdateProduct, ...rest }) => {
-  const navigate = useNavigate();
-
+const Favorite: FC<FavoriteProps> = ({ favorite, onUpdateFavorite, disabled, onClick, ...rest }) => {
   return (
     <Item
       title={favorite.name}
-      mainContent={<ProductImage product={favorite} width="10rem" onUpdate={onUpdateProduct} />}
-      onClick={() => navigate(`/product/${favorite.ml_id}`)}
+      mainContent={
+        <ProductImage product={favorite} width="10rem" onUpdate={onUpdateFavorite} disabled={disabled} />
+      }
+      onClick={onClick}
       {...rest}
     >
       <ItemChild

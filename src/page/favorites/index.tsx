@@ -5,8 +5,10 @@ import { getStyles } from './style';
 import { FAVORITE_SERVICE } from '../../service/favorite.service';
 import { ProductModel } from '../../model/product';
 import Favorite from '../../component/favorite';
+import { useNavigate } from 'react-router';
 
 const FavoritesPage: FC = () => {
+  const navigate = useNavigate();
   const [favorites, setFavorites] = useState<Array<ProductModel>>([]);
   const [styles] = useState(getStyles());
 
@@ -32,6 +34,7 @@ const FavoritesPage: FC = () => {
           <Favorite
             key={`favorite-${favorite.ml_id}`}
             favorite={favorite}
+            onClick={() => navigate(`/product/${favorite.ml_id}`)}
             onUpdateFavorite={updateFavorite}
           />
         ))}
