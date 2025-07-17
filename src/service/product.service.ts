@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { Service } from './service';
-import { ProductResponse } from '../type/product-response.type';
+import { ProductResponse } from '../type/product.response.type';
 import { ProductModel } from '../model/product';
 
 export class ProductService extends Service {

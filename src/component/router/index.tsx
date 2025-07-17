@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import LoginPage from '../../page/login';
 import { CssBaseline } from '@mui/material';
 import HomePage from '../../page/home';
@@ -67,6 +67,7 @@ const Router = () => {
           <Route path="/admin/product" element={<ProtectedRoute roles={[Role.administrator]} />}>
             <Route path="/admin/product/:ml_id" element={<AdminProductPage />} />
           </Route>
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
     </>

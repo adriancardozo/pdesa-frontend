@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import PageContainer from '../../component/page-container';
 import { USER_SERVICE } from '../../service/user.service';
-import { UserResponse } from '../../type/user-response.type';
+import { UserResponse } from '../../type/user.response.type';
 import User from '../../component/user';
 import { Button, Grid2, Typography } from '@mui/material';
 import { getStyles } from './style';

@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
-import { ProductResponse } from '../type/product-response.type';
+import { ProductResponse } from '../type/product.response.type';
 import { Service } from './service';
-import { UserResponse } from '../type/user-response.type';
+import { UserResponse } from '../type/user.response.type';
 import { MetricItem } from '../type/metric-item.type';
 
 export class AdminMetricsService extends Service {

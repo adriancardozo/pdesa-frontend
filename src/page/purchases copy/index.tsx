@@ -6,10 +6,8 @@ import { PurchaseResponse } from '../../type/purchase.response';
 import { getStyles } from './style';
 import Purchase from '../../component/purchase';
 import { ProductModel } from '../../model/product';
-import { useNavigate } from 'react-router';
 
 const PurchasesPage: FC = () => {
-  const navigate = useNavigate();
   const [purchases, setPurchases] = useState<Array<PurchaseResponse>>([]);
   const [styles] = useState(getStyles());
 
@@ -27,12 +25,6 @@ const PurchasesPage: FC = () => {
     );
   };
 
-  const updatePurchase = (search: PurchaseResponse) => {
-    return setPurchases((previous) =>
-      previous.map((purchase) => (search.id === purchase.id ? search : purchase)),
-    );
-  };
-
   return (
     <PageContainer>
       <Grid2 sx={styles.root}>
@@ -42,14 +34,7 @@ const PurchasesPage: FC = () => {
           </Typography>
         </Grid2>
         {purchases.map((purchase) => (
-          <Purchase
-            key={`purchase-${purchase.id}`}
-            purchase={purchase}
-            onUpdateProduct={updateProduct}
-            onUpdateReview={updatePurchase}
-            onDeleteReview={updatePurchase}
-            onClick={() => navigate(`/product/${purchase.product.ml_id}`)}
-          />
+          <Purchase key={`purchase-${purchase.id}`} purchase={purchase} onUpdateProduct={updateProduct} />
         ))}
       </Grid2>
     </PageContainer>

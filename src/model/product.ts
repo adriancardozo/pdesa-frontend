@@ -1,4 +1,4 @@
-import { ProductResponse } from '../type/product-response.type';
+import { ProductResponse } from '../type/product.response.type';
 
 export class ProductModel implements ProductResponse {
   ml_id: string;
@@ -17,7 +17,7 @@ export class ProductModel implements ProductResponse {
     this.images = product.images;
   }
 
-  replace(search: ProductModel): ProductModel {
+  replace<T extends ProductModel>(search: T): T | this {
     return search.ml_id === this.ml_id ? this : search;
   }
 }

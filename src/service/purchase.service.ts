@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { Service } from './service';
-import { PurchaseResponse } from '../type/purchase-response';
+import { PurchaseResponse } from '../type/purchase.response';
 
 export class PurchaseService extends Service {
   async purchases(): Promise<AxiosResponse<Array<PurchaseResponse>>> {
