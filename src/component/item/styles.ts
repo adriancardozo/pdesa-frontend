@@ -8,6 +8,7 @@ export type ItemStyles = {
   image: Grid2Props['sx'];
   item: Grid2Props['sx'];
   content: Grid2Props['sx'];
+  secondary: Grid2Props['sx'];
 };
 
 export function getStyles(): ItemStyles {
@@ -25,5 +26,6 @@ export function getStyles(): ItemStyles {
     image: { width: '10rem' },
     item: { textAlign: 'start', display: 'flex', flexDirection: 'column' },
     content: { overflow: 'hidden', display: 'flex' },
+    secondary: { overflow: 'hidden', padding: '2rem', cursor: 'auto' },
   };
 }

@@ -2,7 +2,7 @@ import { Grid2, Typography } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 import PageContainer from '../../component/page-container';
 import { PURCHASE_SERVICE } from '../../service/purchase.service';
-import { PurchaseResponse } from '../../type/purchase-response';
+import { PurchaseResponse } from '../../type/purchase.response';
 import { getStyles } from './style';
 import Purchase from '../../component/purchase';
 import { ProductModel } from '../../model/product';
@@ -27,6 +27,12 @@ const PurchasesPage: FC = () => {
     );
   };
 
+  const updatePurchase = (search: PurchaseResponse) => {
+    return setPurchases((previous) =>
+      previous.map((purchase) => (search.id === purchase.id ? search : purchase)),
+    );
+  };
+
   return (
     <PageContainer>
       <Grid2 sx={styles.root}>
@@ -40,6 +46,8 @@ const PurchasesPage: FC = () => {
             key={`purchase-${purchase.id}`}
             purchase={purchase}
             onUpdateProduct={updateProduct}
+            onUpdateReview={updatePurchase}
+            onDeleteReview={updatePurchase}
             onClick={() => navigate(`/product/${purchase.product.ml_id}`)}
           />
         ))}

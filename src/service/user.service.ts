@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { Service } from './service';
-import { UserResponse } from '../type/user-response.type';
+import { UserResponse } from '../type/user.response.type';
 
 export class UserService extends Service {
   async users(): Promise<AxiosResponse<Array<UserResponse>>> {

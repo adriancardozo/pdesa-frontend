@@ -3,8 +3,8 @@ import PageContainer from '../../component/page-container';
 import { Grid2, Typography } from '@mui/material';
 import { getStyles } from './style';
 import MetricCard from '../../component/metric-card';
-import { UserResponse } from '../../type/user-response.type';
-import { ProductResponse } from '../../type/product-response.type';
+import { UserResponse } from '../../type/user.response.type';
+import { ProductResponse } from '../../type/product.response.type';
 import { ADMIN_METRICS_SERVICE } from '../../service/admin-metrics.service';
 import { MetricItem } from '../../type/metric-item.type';
 

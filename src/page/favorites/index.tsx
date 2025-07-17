@@ -3,13 +3,13 @@ import { FC, useEffect, useState } from 'react';
 import PageContainer from '../../component/page-container';
 import { getStyles } from './style';
 import { FAVORITE_SERVICE } from '../../service/favorite.service';
-import { ProductModel } from '../../model/product';
 import Favorite from '../../component/favorite';
 import { useNavigate } from 'react-router';
+import { FavoriteModel } from '../../model/favorite';
 
 const FavoritesPage: FC = () => {
   const navigate = useNavigate();
-  const [favorites, setFavorites] = useState<Array<ProductModel>>([]);
+  const [favorites, setFavorites] = useState<Array<FavoriteModel>>([]);
   const [styles] = useState(getStyles());
 
   useEffect(() => {
@@ -18,8 +18,12 @@ const FavoritesPage: FC = () => {
       .catch((e) => console.error(e));
   }, []);
 
-  const updateFavorite = (product: ProductModel) => {
-    return setFavorites((previous) => previous.filter((favorite) => favorite.ml_id !== product.ml_id));
+  const updateFavorite = (search: FavoriteModel) => {
+    return setFavorites((previous) => previous.map((favorite) => search.replace(favorite)));
+  };
+
+  const deleteFavorite = (search: FavoriteModel) => {
+    return setFavorites((previous) => previous.filter((favorite) => favorite.ml_id !== search.ml_id));
   };
 
   return (
@@ -35,7 +39,9 @@ const FavoritesPage: FC = () => {
             key={`favorite-${favorite.ml_id}`}
             favorite={favorite}
             onClick={() => navigate(`/product/${favorite.ml_id}`)}
-            onUpdateFavorite={updateFavorite}
+            onUpdateReview={updateFavorite}
+            onDeleteReview={updateFavorite}
+            onUpdateFavorite={deleteFavorite}
           />
         ))}
       </Grid2>

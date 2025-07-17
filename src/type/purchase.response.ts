@@ -1,5 +1,5 @@
-import { ProductResponse } from './product-response.type';
-import { ReviewResponse } from './review-response';
+import { ProductResponse } from './product.response.type';
+import { ReviewResponse } from './review.response';
 
 export type PurchaseResponse = {
   id: string;

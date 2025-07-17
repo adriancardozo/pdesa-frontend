@@ -1,18 +1,30 @@
 import { FC, MouseEventHandler } from 'react';
-import { PurchaseResponse } from '../../type/purchase-response';
+import { PurchaseResponse } from '../../type/purchase.response';
 import Item from '../item';
 import ItemChild from '../item-child';
 import ProductImage from '../product-image';
-import { ProductModel } from '../../model/product';
+import { FavoriteModel } from '../../model/favorite';
+import ReviewForm from '../review-form';
+import { ReviewType } from '../../enum/review-type.enum';
 
 export type PurchaseProps = {
   purchase: PurchaseResponse;
-  onUpdateProduct: (product: ProductModel) => void;
+  onUpdateProduct: (favorite: FavoriteModel) => void;
+  onUpdateReview: (purchase: PurchaseResponse) => void;
+  onDeleteReview: (purchase: PurchaseResponse) => void;
   onClick?: MouseEventHandler<HTMLDivElement>;
   disabled?: boolean;
 };
 
-const Purchase: FC<PurchaseProps> = ({ purchase, onUpdateProduct, disabled, onClick, ...rest }) => {
+const Purchase: FC<PurchaseProps> = ({
+  purchase,
+  onUpdateProduct,
+  disabled,
+  onClick,
+  onUpdateReview,
+  onDeleteReview,
+  ...rest
+}) => {
   return (
     <Item
       title={purchase.product.name}
@@ -21,6 +33,15 @@ const Purchase: FC<PurchaseProps> = ({ purchase, onUpdateProduct, disabled, onCl
           product={purchase.product}
           width="10rem"
           onUpdate={onUpdateProduct}
+          disabled={disabled}
+        />
+      }
+      secondaryContent={
+        <ReviewForm
+          review={purchase.review}
+          type={ReviewType.purchase}
+          onUpdate={onUpdateReview}
+          onDelete={onDeleteReview}
           disabled={disabled}
         />
       }

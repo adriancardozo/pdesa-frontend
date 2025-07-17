@@ -4,12 +4,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { getStyles } from './styles';
 import { FAVORITE_SERVICE } from '../../service/favorite.service';
-import { ProductResponse } from '../../type/product-response.type';
-import { ProductModel } from '../../model/product';
+import { ProductResponse } from '../../type/product.response.type';
+import { FavoriteModel } from '../../model/favorite';
 
 export type FavoriteButtonProps<T extends ProductResponse> = {
   product: T;
-  onUpdate: (product: ProductModel) => void;
+  onUpdate: (favorite: FavoriteModel) => void;
   disabled?: boolean;
 };
 

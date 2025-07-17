@@ -3,8 +3,8 @@ import { MouseEventHandler, ReactNode, useState } from 'react';
 import ActionText from '../action-text';
 import { getStyles } from './styles';
 import { MetricItem as MetricItemType } from '../../type/metric-item.type';
-import { UserResponse } from '../../type/user-response.type';
-import { ProductResponse } from '../../type/product-response.type';
+import { UserResponse } from '../../type/user.response.type';
+import { ProductResponse } from '../../type/product.response.type';
 import { useNavigate } from 'react-router';
 
 export type UserMetricItemProps = {

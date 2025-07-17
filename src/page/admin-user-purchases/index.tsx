@@ -1,10 +1,10 @@
 import { Grid2, Typography } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 import PageContainer from '../../component/page-container';
-import { PurchaseResponse } from '../../type/purchase-response';
+import { PurchaseResponse } from '../../type/purchase.response';
 import { getStyles } from './style';
 import Purchase from '../../component/purchase';
-import { UserResponse } from '../../type/user-response.type';
+import { UserResponse } from '../../type/user.response.type';
 import { useNavigate, useParams } from 'react-router';
 import { ADMIN_USER_SERVICE } from '../../service/admin-user.service';
 
@@ -37,6 +37,8 @@ const AdminUserPurchasesPage: FC = () => {
             key={`purchase-${purchase.id}`}
             purchase={purchase}
             onUpdateProduct={() => undefined}
+            onUpdateReview={() => undefined}
+            onDeleteReview={() => undefined}
             onClick={() => navigate(`/admin/product/${purchase.product.ml_id}`)}
             disabled
           />

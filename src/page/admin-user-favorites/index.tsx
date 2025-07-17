@@ -5,14 +5,14 @@ import { getStyles } from './style';
 import Favorite from '../../component/favorite';
 import { ADMIN_USER_SERVICE } from '../../service/admin-user.service';
 import { useNavigate, useParams } from 'react-router';
-import { ProductResponse } from '../../type/product-response.type';
-import { UserResponse } from '../../type/user-response.type';
+import { UserResponse } from '../../type/user.response.type';
+import { FavoriteResponse } from '../../type/favorite.response';
 
 const AdminUserFavoritesPage: FC = () => {
   const navigate = useNavigate();
   const { user_id } = useParams();
   const [user, setUser] = useState<UserResponse>();
-  const [favorites, setFavorites] = useState<Array<ProductResponse>>([]);
+  const [favorites, setFavorites] = useState<Array<FavoriteResponse>>([]);
   const [styles] = useState(getStyles());
 
   useEffect(() => {
@@ -38,6 +38,8 @@ const AdminUserFavoritesPage: FC = () => {
             favorite={favorite}
             onUpdateFavorite={() => undefined}
             onClick={() => navigate(`/admin/product/${favorite.ml_id}`)}
+            onUpdateReview={() => undefined}
+            onDeleteReview={() => undefined}
             disabled
           />
         ))}
