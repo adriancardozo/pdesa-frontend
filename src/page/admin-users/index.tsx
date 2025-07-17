@@ -23,7 +23,7 @@ const AdminUsersPage: FC = () => {
           <Typography variant="h4" sx={styles.title}>
             Usuarios
           </Typography>
-          <Button onClick={() => navigate('/admin/user/register')}>Create user</Button>
+          <Button onClick={() => navigate('/admin/user/register')}>Crear usuario</Button>
         </Grid2>
         {users.map((user) => (
           <User key={`user-${user.id}`} user={user} />

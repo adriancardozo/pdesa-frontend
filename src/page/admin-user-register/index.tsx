@@ -1,6 +1,15 @@
 import { FC, MouseEventHandler, useState } from 'react';
 import PageContainer from '../../component/page-container';
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { getStyles } from './style';
 import { useNavigate } from 'react-router';
 import { Role } from '../../enum/role.enum';
@@ -62,13 +71,20 @@ const AdminUserRegisterPage: FC = () => {
           onChange={(e) => setEmail(e.target.value)}
           data-testid="register-email"
         />
-        <TextField
-          label="Rol"
-          variant="standard"
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          data-testid="register-role"
-        />
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Rol</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            variant="standard"
+            value={role}
+            label="Rol"
+            onChange={(e) => setRole(e.target.value)}
+          >
+            <MenuItem value={Role.administrator}>Administrador</MenuItem>
+            <MenuItem value={Role.purchaser}>Comprador</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           label="Usuario"
           variant="standard"
