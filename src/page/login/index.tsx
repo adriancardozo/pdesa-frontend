@@ -1,4 +1,4 @@
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Button, Snackbar, Stack, TextField, Typography } from '@mui/material';
 import { FC, MouseEventHandler, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { AUTH_SERVICE } from '../../service/auth.service';
@@ -6,6 +6,7 @@ import { getStyles } from './style';
 import PageContainer from '../../component/page-container';
 
 const LoginPage: FC = () => {
+  const [open, setOpen] = useState({ open: false, error: '' });
   const [styles] = useState(getStyles());
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -13,7 +14,8 @@ const LoginPage: FC = () => {
 
   const login: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    AUTH_SERVICE.login(username, password).then(({ data }) => {
+    AUTH_SERVICE.login(username, password).then(({ status, data, message }: any) => {
+      if (status >= 400) setOpen({ open: true, error: message ?? '' });
       localStorage.setItem('token', data.access_token);
       navigate('/home');
     });
@@ -45,6 +47,12 @@ const LoginPage: FC = () => {
           Ingresar
         </Button>
       </Stack>
+      <Snackbar
+        open={open.open}
+        autoHideDuration={6000}
+        onClose={() => setOpen({ open: false, error: '' })}
+        message={open.error}
+      />
       <Typography>
         Si aún no estás registrado, haz{' '}
         <Typography component="a" href="/register">

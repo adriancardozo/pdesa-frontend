@@ -1,4 +1,4 @@
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Button, Snackbar, Stack, TextField, Typography } from '@mui/material';
 import { FC, MouseEventHandler, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { AUTH_SERVICE } from '../../service/auth.service';
@@ -6,6 +6,7 @@ import { getStyles } from './style';
 import PageContainer from '../../component/page-container';
 
 const RegisterPurchaserPage: FC = () => {
+  const [open, setOpen] = useState({ open: false, error: '' });
   const [styles] = useState(getStyles());
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -17,10 +18,13 @@ const RegisterPurchaserPage: FC = () => {
 
   const register: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    AUTH_SERVICE.registerPurchaser(firstName, lastName, dni, email, username, password).then(({ data }) => {
-      localStorage.setItem('token', data.access_token);
-      navigate('/home');
-    });
+    AUTH_SERVICE.registerPurchaser(firstName, lastName, dni, email, username, password).then(
+      ({ status, data, message }: any) => {
+        if (status >= 400) setOpen({ open: true, error: message ?? '' });
+        localStorage.setItem('token', data.access_token);
+        navigate('/home');
+      },
+    );
   };
 
   return (
@@ -77,6 +81,12 @@ const RegisterPurchaserPage: FC = () => {
           Registrarse
         </Button>
       </Stack>
+      <Snackbar
+        open={open.open}
+        autoHideDuration={6000}
+        onClose={() => setOpen({ open: false, error: '' })}
+        message={open.error}
+      />
       <Typography>
         Si ya tienes una cuenta, haz{' '}
         <Typography component="a" href="/">
