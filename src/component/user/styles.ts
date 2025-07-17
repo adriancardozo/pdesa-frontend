@@ -1,4 +1,5 @@
 import { CardProps, Grid2Props, TypographyProps } from '@mui/material';
+import { Role } from '../../enum/role.enum';
 
 export type UserStyles = {
   root: Grid2Props['sx'];
@@ -7,9 +8,10 @@ export type UserStyles = {
   name: TypographyProps['sx'];
   image: Grid2Props['sx'];
   user: Grid2Props['sx'];
+  buttons: Grid2Props['sx'];
 };
 
-export function getStyles(): UserStyles {
+export function getStyles(role: Role): UserStyles {
   return {
     root: { position: 'relative', width: '100%' },
     card: {
@@ -23,5 +25,10 @@ export function getStyles(): UserStyles {
     name: { height: '33%', paddingInline: '0.75rem' },
     image: { width: '100%' },
     user: { textAlign: 'start', display: 'flex', flexDirection: 'column' },
+    buttons: {
+      display: 'flex',
+      flexDirection: 'column',
+      visibility: role === Role.purchaser ? 'visible' : 'hidden',
+    },
   };
 }

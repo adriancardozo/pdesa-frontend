@@ -11,6 +11,7 @@ export type ProductImageProps<T extends ProductResponse> = {
   width?: Property.Width<string | number>;
   withFavorite?: boolean;
   onUpdate: (product: ProductModel) => void;
+  disabled?: boolean;
 };
 
 const ProductImage = <T extends ProductResponse>({
@@ -18,6 +19,7 @@ const ProductImage = <T extends ProductResponse>({
   width,
   withFavorite,
   onUpdate,
+  disabled,
 }: ProductImageProps<T>): ReactNode => {
   const [styles] = useState(getStyles(width));
   const favorite = withFavorite ?? true;
@@ -29,7 +31,7 @@ const ProductImage = <T extends ProductResponse>({
       </Grid2>
       {favorite && (
         <Grid2 sx={styles.favoriteGrid}>
-          <FavoriteButton product={product} onUpdate={onUpdate} />
+          <FavoriteButton product={product} onUpdate={onUpdate} disabled={disabled} />
         </Grid2>
       )}
     </Grid2>
