@@ -1,12 +1,23 @@
 import { FC, MouseEventHandler, useState } from 'react';
 import PageContainer from '../../component/page-container';
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Snackbar,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { getStyles } from './style';
 import { useNavigate } from 'react-router';
 import { Role } from '../../enum/role.enum';
 import { AUTH_SERVICE } from '../../service/auth.service';
 
 const AdminUserRegisterPage: FC = () => {
+  const [open, setOpen] = useState({ open: false, error: '' });
   const [styles] = useState(getStyles());
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -20,12 +31,18 @@ const AdminUserRegisterPage: FC = () => {
   const register: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     if (role === Role.purchaser) {
-      AUTH_SERVICE.registerPurchaser(firstName, lastName, dni, email, username, password).then(() =>
-        navigate('/admin/user'),
+      AUTH_SERVICE.registerPurchaser(firstName, lastName, dni, email, username, password).then(
+        ({ status, message }: any) => {
+          if (status >= 400) setOpen({ open: true, error: message ?? '' });
+          if (status < 400) navigate('/admin/user');
+        },
       );
     } else {
-      AUTH_SERVICE.registerAdministrator(firstName, lastName, dni, email, username, password).then(() =>
-        navigate('/admin/user'),
+      AUTH_SERVICE.registerAdministrator(firstName, lastName, dni, email, username, password).then(
+        ({ status, message }: any) => {
+          if (status >= 400) setOpen({ open: true, error: message ?? '' });
+          if (status < 400) navigate('/admin/user');
+        },
       );
     }
   };
@@ -62,13 +79,20 @@ const AdminUserRegisterPage: FC = () => {
           onChange={(e) => setEmail(e.target.value)}
           data-testid="register-email"
         />
-        <TextField
-          label="Rol"
-          variant="standard"
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          data-testid="register-role"
-        />
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Rol</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            variant="standard"
+            value={role}
+            label="Rol"
+            onChange={(e) => setRole(e.target.value)}
+          >
+            <MenuItem value={Role.administrator}>Administrador</MenuItem>
+            <MenuItem value={Role.purchaser}>Comprador</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           label="Usuario"
           variant="standard"
@@ -88,6 +112,12 @@ const AdminUserRegisterPage: FC = () => {
           Crear
         </Button>
       </Stack>
+      <Snackbar
+        open={open.open}
+        autoHideDuration={6000}
+        onClose={() => setOpen({ open: false, error: '' })}
+        message={open.error}
+      />
     </PageContainer>
   );
 };

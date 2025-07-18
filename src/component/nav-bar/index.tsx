@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { getStyles } from './style';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { AUTH_SERVICE } from '../../service/auth.service';
-import { UserResponse } from '../../type/user-response.type';
+import { UserResponse } from '../../type/user.response.type';
 import RoleNavButtonGroup from '../role-nav-button-group';
 
 const NavBar: FC = () => {

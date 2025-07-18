@@ -1,31 +1,33 @@
 import { AxiosResponse } from 'axios';
-import { ProductResponse } from '../type/product-response.type';
 import { Service } from './service';
-import { ProductModel } from '../model/product';
+import { FavoriteResponse } from '../type/favorite.response';
+import { FavoriteModel } from '../model/favorite';
 
 export class FavoriteService extends Service {
-  async favorites(): Promise<AxiosResponse<Array<ProductModel>>> {
-    return await this.httpClient.get('favorite').then((response: AxiosResponse<Array<ProductResponse>>) => {
-      response.data = response.data.map((favorite) => new ProductModel(favorite));
-      return response as AxiosResponse<Array<ProductModel>>;
-    });
-  }
-
-  async addFavorite(id_ml: string): Promise<AxiosResponse<ProductModel>> {
+  async favorites(): Promise<AxiosResponse<Array<FavoriteModel>>> {
     return await this.httpClient
-      .post(`favorite/${id_ml}`)
-      .then((response: AxiosResponse<ProductResponse>) => {
-        response.data = new ProductModel(response.data);
-        return response as AxiosResponse<ProductModel>;
+      .get('favorite')
+      .then((response: AxiosResponse<Array<FavoriteResponse>>) => {
+        response.data = response.data.map((favorite) => new FavoriteModel(favorite));
+        return response as AxiosResponse<Array<FavoriteModel>>;
       });
   }
 
-  async deleteFavorite(id_ml: string): Promise<AxiosResponse<ProductModel>> {
+  async addFavorite(id_ml: string): Promise<AxiosResponse<FavoriteModel>> {
+    return await this.httpClient
+      .post(`favorite/${id_ml}`)
+      .then((response: AxiosResponse<FavoriteResponse>) => {
+        response.data = new FavoriteModel(response.data);
+        return response as AxiosResponse<FavoriteModel>;
+      });
+  }
+
+  async deleteFavorite(id_ml: string): Promise<AxiosResponse<FavoriteModel>> {
     return await this.httpClient
       .delete(`favorite/${id_ml}`)
-      .then((response: AxiosResponse<ProductResponse>) => {
-        response.data = new ProductModel(response.data);
-        return response as AxiosResponse<ProductModel>;
+      .then((response: AxiosResponse<FavoriteResponse>) => {
+        response.data = new FavoriteModel(response.data);
+        return response as AxiosResponse<FavoriteModel>;
       });
   }
 }

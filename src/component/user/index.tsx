@@ -1,5 +1,5 @@
 import { FC, MouseEventHandler, useState } from 'react';
-import { UserResponse } from '../../type/user-response.type';
+import { UserResponse } from '../../type/user.response.type';
 import { Button, Card, Chip, Grid2, Tooltip, Typography } from '@mui/material';
 import { getStyles } from './styles';
 import { Role } from '../../enum/role.enum';

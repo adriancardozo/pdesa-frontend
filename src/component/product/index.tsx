@@ -4,7 +4,8 @@ import { getStyles } from './styles';
 import { ProductModel } from '../../model/product';
 import { useNavigate } from 'react-router';
 import ProductImage from '../product-image';
-import { ProductResponse } from '../../type/product-response.type';
+import { ProductResponse } from '../../type/product.response.type';
+import { FavoriteModel } from '../../model/favorite';
 
 export type ProductProps<T extends ProductResponse> = {
   product: T;
@@ -19,8 +20,8 @@ const Product = <T extends ProductResponse>({
   const navigate = useNavigate();
   const [styles] = useState(getStyles());
 
-  const updateFavorite = (product: ProductModel) => {
-    setProducts((previous) => previous.map((search) => product.replace(search)));
+  const updateFavorite = (favorite: FavoriteModel) => {
+    setProducts((previous) => previous.map((search) => favorite.replace(search)));
   };
 
   return (

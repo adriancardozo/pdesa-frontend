@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import PageContainer from '../../component/page-container';
 import { USER_SERVICE } from '../../service/user.service';
-import { UserResponse } from '../../type/user-response.type';
+import { UserResponse } from '../../type/user.response.type';
 import User from '../../component/user';
 import { Button, Grid2, Typography } from '@mui/material';
 import { getStyles } from './style';
@@ -23,7 +23,7 @@ const AdminUsersPage: FC = () => {
           <Typography variant="h4" sx={styles.title}>
             Usuarios
           </Typography>
-          <Button onClick={() => navigate('/admin/user/register')}>Create user</Button>
+          <Button onClick={() => navigate('/admin/user/register')}>Crear usuario</Button>
         </Grid2>
         {users.map((user) => (
           <User key={`user-${user.id}`} user={user} />

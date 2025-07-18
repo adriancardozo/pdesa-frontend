@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
-import { UserResponse } from '../../type/user-response.type';
-import { ProductResponse } from '../../type/product-response.type';
+import { UserResponse } from '../../type/user.response.type';
+import { ProductResponse } from '../../type/product.response.type';
 import { Card, Grid2, Typography } from '@mui/material';
 import { MetricItem as MetricItemType } from '../../type/metric-item.type';
 import { getStyles } from './styles';

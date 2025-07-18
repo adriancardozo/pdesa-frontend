@@ -1,16 +1,16 @@
 import { Grid2 } from '@mui/material';
 import { ReactNode, useState } from 'react';
 import FavoriteButton from '../favorite-button';
-import { ProductResponse } from '../../type/product-response.type';
+import { ProductResponse } from '../../type/product.response.type';
 import { getStyles } from './styles';
 import { Property } from 'csstype';
-import { ProductModel } from '../../model/product';
+import { FavoriteModel } from '../../model/favorite';
 
 export type ProductImageProps<T extends ProductResponse> = {
   product: T;
   width?: Property.Width<string | number>;
   withFavorite?: boolean;
-  onUpdate: (product: ProductModel) => void;
+  onUpdate: (favorite: FavoriteModel) => void;
   disabled?: boolean;
 };
 
